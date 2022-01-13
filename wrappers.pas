@@ -16,6 +16,14 @@ type
     destructor Destroy; override;
   end;
 
+  { TGlProgram }
+
+  TGlProgram = class
+    Fhandle: GLuint;
+    constructor Create(const FileName: String);
+    destructor Destroy; override;
+  end;
+
   { TGlfwWindow }
 
   TGlfwWindow = class
@@ -85,6 +93,59 @@ begin
     glfwSetWindowShouldClose(p, 1);
 end;
 
+{ TGlProgram }
+
+constructor TGlProgram.Create(const FileName: String);
+var
+  Status, LogLength: GLint;
+  FProgram, VertexShader, FragmentShader: GLuint;
+  Log: TBytes;
+  Msg: String;
+begin
+  FragmentShader := 0;
+  VertexShader := CreateShader(FileName+'.vs', GL_VERTEX_SHADER);
+  try
+    FragmentShader := CreateShader(FileName+'.fs', GL_FRAGMENT_SHADER);
+    FProgram := glCreateProgram();
+
+    glAttachShader(FProgram, VertexShader);
+    glErrorCheck;
+
+    glAttachShader(FProgram, FragmentShader);
+    glErrorCheck;
+
+    glLinkProgram(FProgram);
+    glGetProgramiv(FProgram, GL_LINK_STATUS, @Status);
+
+    if (Status <> GL_TRUE) then
+    begin
+      glGetProgramiv(FProgram, GL_INFO_LOG_LENGTH, @LogLength);
+      if (LogLength > 0) then begin
+        Log := nil;
+       SetLength(Log, LogLength);
+       glGetProgramInfoLog(FProgram, LogLength, @LogLength, @Log[0]);
+       Msg := TEncoding.ANSI.GetAnsiString(Log);
+       raise Exception.Create(Msg);
+      end;
+    end;
+    glErrorCheck;
+
+  finally
+    if (FragmentShader <> 0) then
+     glDeleteShader(FragmentShader);
+
+    if (VertexShader <> 0) then
+     glDeleteShader(VertexShader);
+  end;
+  Fhandle:= FProgram;
+  glUseProgram(Fhandle);
+end;
+
+destructor TGlProgram.Destroy;
+begin
+  inherited Destroy;
+end;
+
 { TGlfwWindow }
 
 function TGlfwWindow.GetShouldClose: Boolean;
@@ -97,7 +158,7 @@ begin
   glfwInit;
   Fhandle := glfwCreateWindow(1280, 800, '', nil, nil);
   glfwMakeContextCurrent( Fhandle );
-  Load_GL_version_1_5;
+  Load_GL_version_2_1;
   glfwSwapInterval(0);
   glfwSetKeyCallback(Fhandle, @keyFunc);
 end;

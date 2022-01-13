@@ -19,11 +19,12 @@ begin
   with TGlfwWindow.Create do try
     TGlBuffer.Create(GL_ARRAY_BUFFER, @vertices, sizeof(vertices));
     TGlBuffer.Create(GL_ELEMENT_ARRAY_BUFFER, @indices, sizeof(indices));
+    TGlProgram.Create('shader');
     glEnableClientState(GL_VERTEX_ARRAY);
     glVertexPointer(2, GL_FLOAT, 0, nil);
     repeat
       glClear(GL_COLOR_BUFFER_BIT);
-      for i:=1 to 1000 do begin
+      for i := 1 to 1000 do begin
         glDrawElements(GL_TRIANGLES, 3*IndexSize, GL_UNSIGNED_INT, nil);
       end;
       ProcessMessages;
