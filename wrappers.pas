@@ -156,9 +156,17 @@ end;
 constructor TGlfwWindow.Create;
 begin
   glfwInit;
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   Fhandle := glfwCreateWindow(1280, 800, '', nil, nil);
+  if Fhandle = nil then
+     raise Exception.Create('GLFW failed to create window');
   glfwMakeContextCurrent( Fhandle );
-  Load_GL_version_2_1;
+
+  glfwSetWindowTitle(Fhandle, PChar(String(glGetString(GL_RENDERER)) + ' - ' + String(glGetString(GL_VERSION))));
+  Load_GL_version_3_3;
   glfwSwapInterval(0);
   glfwSetKeyCallback(Fhandle, @keyFunc);
 end;

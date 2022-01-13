@@ -1,7 +1,11 @@
-attribute vec3 position;
+#version 150 core
+
+in vec4 position;
 
 void main()
 {
-  gl_Position = vec4(position.x, position.y, position.z, 1.0);
+  gl_Position = position;
+  gl_Position.x = gl_VertexID % 18 * 1e-2;
+  gl_Position.y = gl_VertexID % 2 * 3e-2;
 }
 
