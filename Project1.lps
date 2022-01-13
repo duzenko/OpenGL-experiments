@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units>
+      <Unit>
+        <Filename Value="Project1.pas"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="25"/>
+        <CursorPos X="39" Y="45"/>
+        <UsageCount Value="24"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\rtl\objpas\objpas.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="35"/>
+        <CursorPos X="8" Y="46"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengles\src\gles20.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="907"/>
+        <CursorPos X="17" Y="929"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <UnitName Value="GLext"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="82"/>
+        <CursorPos Y="107"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit>
+    </Units>
+    <JumpHistory HistoryIndex="29">
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="985" Column="33" TopLine="964"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="986" Column="16" TopLine="965"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="987" Column="28" TopLine="966"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="988" Column="27" TopLine="967"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="989" Column="28" TopLine="968"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="990" Column="31" TopLine="969"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="991" Column="32" TopLine="970"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="992" Column="36" TopLine="971"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="993" Column="38" TopLine="972"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="994" Column="37" TopLine="973"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="995" Column="38" TopLine="974"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="996" Column="35" TopLine="975"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="997" Column="37" TopLine="976"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="998" Column="36" TopLine="977"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="999" Column="37" TopLine="978"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="1001" Column="27" TopLine="980"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="1002" Column="27" TopLine="981"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="1003" Column="31" TopLine="982"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="1004" Column="31" TopLine="983"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="1005" Column="28" TopLine="984"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="1006" Column="25" TopLine="985"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="1007" Column="26" TopLine="986"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="1008" Column="29" TopLine="987"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="1009" Column="30" TopLine="988"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="1010" Column="29" TopLine="989"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="1011" Column="30" TopLine="990"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="1012" Column="33" TopLine="991"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="1013" Column="33" TopLine="992"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="1015" Column="21" TopLine="994"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <Caret Line="1017" Column="15" TopLine="996"/>
+      </Position>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+  <Debugging>
+    <Watches>
+      <Item>
+        <Expression Value="glBindBuffer"/>
+      </Item>
+    </Watches>
+  </Debugging>
+</CONFIG>
