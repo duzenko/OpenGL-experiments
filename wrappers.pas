@@ -43,6 +43,7 @@ type
 
   TGlfwWindow = class
   private
+    Ffps: Integer;
     Fhandle: pGLFWwindow;
     FObjects: TObjectList;
     FActive: TGlfwWindow; static;
@@ -52,6 +53,7 @@ type
     destructor Destroy; override;
     procedure ProcessMessages;
     property ShouldClose: Boolean read GetShouldClose;
+    property FPS: Integer read Ffps;
     class property Active: TGlfwWindow read FActive;
   end;
 
@@ -173,6 +175,7 @@ begin
   FObjects := TObjectList.Create();
   glfwSwapInterval(0);
   glfwSetKeyCallback(Fhandle, @keyFunc);
+  WriteLn('Done');
 end;
 
 destructor TGlfwWindow.Destroy;
@@ -184,9 +187,18 @@ begin
 end;
 
 procedure TGlfwWindow.ProcessMessages;
+const
+	lastTime: TDateTime = 0;
+  frameCnt: Integer = 0;
 begin
   glfwSwapBuffers(Fhandle);
   glfwPollEvents;
+  if Now - lastTime > 1/86400 then begin
+    Ffps := Round(frameCnt * (Now - lastTime) * 86400);
+    lastTime := Now;
+    frameCnt := 0;
+  end;
+  Inc(frameCnt);
 end;
 
 { TGlBuffer }

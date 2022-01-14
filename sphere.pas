@@ -19,8 +19,8 @@ type
   end;
 
 const
-  SphereSubdivision1 = 20; // so that we have exactly 1000 triangles in total
-  SphereSubdivision2 = 25;
+  SphereSubdivision1 = 50; // so that we have exactly 10000 triangles in total
+  SphereSubdivision2 = 100;
 var
   SphereVertices: array[0..(SphereSubdivision1+1)*(SphereSubdivision2+1)-1] of TVertexAttributes;
   SphereIndices: array[0..6*SphereSubdivision1*SphereSubdivision2-1] of Integer;

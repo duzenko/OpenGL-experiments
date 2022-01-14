@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units>
+      <Unit>
+        <Filename Value="glexp.pas"/>
+        <IsPartOfProject Value="True"/>
+        <CursorPos X="3" Y="4"/>
+        <UsageCount Value="89"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="wrappers.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="178"/>
+        <CursorPos X="9" Y="197"/>
+        <UsageCount Value="46"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="shader.fs"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="5"/>
+        <CursorPos Y="5"/>
+        <UsageCount Value="40"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="None"/>
+      </Unit>
+      <Unit>
+        <Filename Value="shader.vs"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="4"/>
+        <CursorPos Y="8"/>
+        <UsageCount Value="36"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="None"/>
+      </Unit>
+      <Unit>
+        <Filename Value="utils.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="41"/>
+        <CursorPos Y="64"/>
+        <UsageCount Value="36"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\rtl\objpas\objpas.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="35"/>
+        <CursorPos X="8" Y="46"/>
+        <UsageCount Value="3"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengles\src\gles20.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="907"/>
+        <CursorPos X="17" Y="929"/>
+        <UsageCount Value="3"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\glext.pp"/>
+        <UnitName Value="GLext"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="5198"/>
+        <CursorPos X="6" Y="5214"/>
+        <UsageCount Value="31"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\rtl\objpas\sysutils\sysutilh.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="89"/>
+        <CursorPos X="4" Y="104"/>
+        <UsageCount Value="7"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\rtl\objpas\sysutils\sysencodingh.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="74"/>
+        <CursorPos X="14" Y="89"/>
+        <UsageCount Value="7"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\opengl\src\gl.pp"/>
+        <UnitName Value="GL"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="143"/>
+        <CursorPos X="9" Y="159"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="glfw336.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="16"/>
+        <CursorPos X="31" Y="41"/>
+        <UsageCount Value="8"/>
+      </Unit>
+      <Unit>
+        <Filename Value="sphere.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="15"/>
+        <CursorPos X="59" Y="22"/>
+        <UsageCount Value="32"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\rtl\inc\mathh.inc"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="9"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\rtl\inc\genmath.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1568"/>
+        <CursorPos X="23" Y="1591"/>
+        <UsageCount Value="9"/>
+      </Unit>
+      <Unit>
+        <Filename Value="test10.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos Y="5"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="test32.pas"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="19"/>
+        <CursorPos Y="35"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit>
+    </Units>
+    <JumpHistory HistoryIndex="11">
+      <Position>
+        <Filename Value="shader.vs"/>
+        <Caret Line="8" Column="28"/>
+      </Position>
+      <Position>
+        <Filename Value="test32.pas"/>
+        <Caret Line="15" TopLine="8"/>
+      </Position>
+      <Position>
+        <Filename Value="test32.pas"/>
+        <Caret Line="3" Column="11"/>
+      </Position>
+      <Position>
+        <Filename Value="test32.pas"/>
+        <Caret Line="5" Column="19"/>
+      </Position>
+      <Position>
+        <Filename Value="test32.pas"/>
+        <Caret Line="21" TopLine="4"/>
+      </Position>
+      <Position>
+        <Filename Value="wrappers.pas"/>
+        <Caret Line="53" Column="15" TopLine="38"/>
+      </Position>
+      <Position>
+        <Filename Value="wrappers.pas"/>
+        <Caret Line="66" TopLine="36"/>
+      </Position>
+      <Position>
+        <Filename Value="test32.pas"/>
+        <Caret Line="34" TopLine="8"/>
+      </Position>
+      <Position>
+        <Filename Value="wrappers.pas"/>
+        <Caret Line="191" TopLine="166"/>
+      </Position>
+      <Position>
+        <Filename Value="wrappers.pas"/>
+        <Caret Line="56" Column="36" TopLine="37"/>
+      </Position>
+      <Position>
+        <Filename Value="wrappers.pas"/>
+        <Caret Line="62" TopLine="37"/>
+      </Position>
+      <Position>
+        <Filename Value="wrappers.pas"/>
+        <Caret Line="197" Column="9" TopLine="178"/>
+      </Position>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+  <Debugging>
+    <Watches>
+      <Item>
+        <Expression Value="glBindBuffer"/>
+      </Item>
+    </Watches>
+  </Debugging>
+</CONFIG>
