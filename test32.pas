@@ -15,7 +15,7 @@ var
 
 procedure RunTest32;
 begin
-  with TGlfwWindow.Create do try
+  with TGlfwWindow.Create(3.2, true) do try
     TGlVao.Create();
     TGlBuffer.Create(GL_ARRAY_BUFFER, @SphereVertices, sizeof(SphereVertices));
     TGlBuffer.Create(GL_ELEMENT_ARRAY_BUFFER, @SphereIndices, sizeof(SphereIndices));

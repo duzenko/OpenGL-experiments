@@ -5,6 +5,6 @@ uses
 
 begin
   WriteLn('Initializing GLFW...');
-  RunTest32;
+  RunTest10;
 end.
 

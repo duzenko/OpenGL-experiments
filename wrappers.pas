@@ -49,7 +49,7 @@ type
     FActive: TGlfwWindow; static;
     function GetShouldClose: Boolean;
   public
-    constructor Create;
+    constructor Create(glVersion: Currency; Core: Boolean);
     destructor Destroy; override;
     procedure ProcessMessages;
     property ShouldClose: Boolean read GetShouldClose;
@@ -153,16 +153,20 @@ begin
   result := glfwWindowShouldClose(Fhandle) <> 0;
 end;
 
-constructor TGlfwWindow.Create;
+constructor TGlfwWindow.Create(glVersion: Currency; Core: Boolean);
+var
+	i: Integer;
 begin
   if Assigned(Active) then
      Abort;
   FActive := Self;
   glfwInit;
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
-  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, Trunc(glVersion));
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, Round(Frac(glVersion)*10));
+  if Core then begin
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+  end;
   WriteLn('Creating window...');
   Fhandle := glfwCreateWindow(1280, 800, '', nil, nil);
   if Fhandle = nil then
