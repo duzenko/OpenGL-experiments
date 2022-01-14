@@ -20,8 +20,7 @@ var
   color: array[0..2] of Single;
 begin
   with TGlfwWindow.Create(1.1, false) do try
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glVertexPointer(3, GL_FLOAT, 0, @SphereVertices);
+    glInterleavedArrays(GL_V3F, 0, @SphereVertices);
     repeat
       if Now - lastTime > 1/86400 then begin
         if lastTime > 0 then begin
