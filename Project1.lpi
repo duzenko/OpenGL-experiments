@@ -8,6 +8,7 @@
         <MainUnitHasCreateFormStatements Value="False"/>
         <MainUnitHasTitleStatement Value="False"/>
         <MainUnitHasScaledStatement Value="False"/>
+        <SaveFoldState Value="False"/>
       </Flags>
       <SessionStorage Value="InProjectDir"/>
       <Title Value="Project1"/>
@@ -36,6 +37,18 @@
         <Filename Value="wrappers.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
+      <Unit>
+        <Filename Value="shader.fs"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="shader.vs"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="utils.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -53,11 +66,6 @@
         <DebugInfoType Value="dsDwarf2Set"/>
         <UseExternalDbgSyms Value="True"/>
       </Debugging>
-      <Options>
-        <Win32>
-          <GraphicApplication Value="True"/>
-        </Win32>
-      </Options>
     </Linking>
     <Other>
       <CompilerMessages>
@@ -75,6 +83,7 @@
       </Item>
       <Item>
         <Name Value="EFOpenError"/>
+        <Enabled Value="False"/>
       </Item>
     </Exceptions>
   </Debugging>

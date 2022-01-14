@@ -3,23 +3,38 @@ unit wrappers;
 interface
 
 uses
-  gl, GLext, glfw336, Classes, SysUtils;
+  SysUtils, Classes, contnrs, gl, GLext, glfw336,
+  utils;
 
 type
 
+  { TGlObject }
+
+  TGlObject = class
+    Fhandle: GLuint;
+    constructor Create;
+    destructor Destroy; override;
+  end;
+
+  { TGlVao }
+
+  TGlVao = class(TGlObject)
+    constructor Create();
+    destructor Destroy; override;
+  end;
+
   { TGlBuffer }
 
-  TGlBuffer = class
+  TGlBuffer = class(TGlObject)
     Ftarget: GLenum;
-    Fhandle: GLuint;
     constructor Create(target: Integer; p: pointer; size: Integer);
     destructor Destroy; override;
   end;
 
   { TGlProgram }
 
-  TGlProgram = class
-    Fhandle: GLuint;
+  TGlProgram = class(TGlObject)
+  public
     constructor Create(const FileName: String);
     destructor Destroy; override;
   end;
@@ -29,68 +44,51 @@ type
   TGlfwWindow = class
   private
     Fhandle: pGLFWwindow;
+    FObjects: TObjectList;
+    FActive: TGlfwWindow; static;
     function GetShouldClose: Boolean;
   public
     constructor Create;
     destructor Destroy; override;
     procedure ProcessMessages;
     property ShouldClose: Boolean read GetShouldClose;
+    class property Active: TGlfwWindow read FActive;
   end;
 
 implementation
-
-procedure glErrorCheck; begin end;
-
-function LoadRawByteString(const s: String): String;
-begin
-  with TStringList.Create do try
-    LoadFromFile(s);
-    Result := Text;
-  finally
-    Free;
-  end;
-end;
-
-function CreateShader(const AShaderPath: String; const AShaderType: GLenum): GLuint;
-var
-  Source: RawByteString;
-  SourcePtr: MarshaledAString;
-  Status, LogLength: GLint;
-  Log: TBytes;
-  Msg: String;
-begin
-  Result := glCreateShader(AShaderType);
-  Assert(Result <> 0);
-  glErrorCheck;
-
-  Source := LoadRawByteString(AShaderPath);
-  SourcePtr := MarshaledAString(Source);
-  glShaderSource(Result, 1, @SourcePtr, nil);
-  glErrorCheck;
-
-  glCompileShader(Result);
-  glErrorCheck;
-
-  Status := GL_FALSE;
-  glGetShaderiv(Result, GL_COMPILE_STATUS, @Status);
-  if (Status <> GL_TRUE) then
-  begin
-    glGetShaderiv(Result, GL_INFO_LOG_LENGTH, @LogLength);
-    if (LogLength > 0) then
-    begin
-      Log := nil;
-      SetLength(Log, LogLength);
-      glGetShaderInfoLog(Result, LogLength, @LogLength, @Log[0]);
-      Msg := TEncoding.ANSI.GetAnsiString(Log);
-      raise Exception.Create(Msg);
-    end;
-  end;
-end;
 
 procedure keyFunc(p: pGLFWWindow; i2, i3, i4, i5: longint); cdecl;
 begin
   if(i2=256) then
     glfwSetWindowShouldClose(p, 1);
+end;
+
+{ TGlVao }
+
+constructor TGlVao.Create();
+begin
+  glGenVertexArrays(1, @Fhandle);
+  glBindVertexArray(Fhandle);
+end;
+
+destructor TGlVao.Destroy;
+begin
+  glDeleteVertexArrays(1, @Fhandle);
+  inherited Destroy;
+end;
+
+{ TGlObject }
+
+constructor TGlObject.Create;
+begin
+  glErrorCheck;
+  TGlfwWindow.Active.FObjects.Add(Self);
+end;
+
+destructor TGlObject.Destroy;
+begin
+  TGlfwWindow.Active.FObjects.Remove(Self);
+  inherited Destroy;
 end;
 
 { TGlProgram }
@@ -155,6 +153,9 @@ end;
 
 constructor TGlfwWindow.Create;
 begin
+  if Assigned(Active) then
+     Abort;
+  FActive := Self;
   glfwInit;
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
@@ -164,16 +165,19 @@ begin
   if Fhandle = nil then
      raise Exception.Create('GLFW failed to create window');
   glfwMakeContextCurrent( Fhandle );
-
+  repeat until glGetError() = GL_NO_ERROR;
   glfwSetWindowTitle(Fhandle, PChar(String(glGetString(GL_RENDERER)) + ' - ' + String(glGetString(GL_VERSION))));
-  Load_GL_version_3_3;
+  Load_GL_version_3_2_CORE;
+  FObjects := TObjectList.Create();
   glfwSwapInterval(0);
   glfwSetKeyCallback(Fhandle, @keyFunc);
 end;
 
 destructor TGlfwWindow.Destroy;
 begin
+  FObjects.Free;
   glfwTerminate;
+  FActive := nil;
   inherited Destroy;
 end;
 
@@ -187,6 +191,7 @@ end;
 
 constructor TGlBuffer.Create(target: Integer; p: pointer; size: Integer);
 begin
+  inherited Create;
   Ftarget := target;
   glGenBuffers(1, @Fhandle);
   glBindBuffer(Ftarget, Fhandle);

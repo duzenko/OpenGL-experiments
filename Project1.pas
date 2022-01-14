@@ -1,6 +1,6 @@
 program Project1;
 
-uses gl, GLext, SysUtils, classes, wrappers;
+uses gl, GLext, SysUtils, classes, wrappers, utils;
 
 const
   vertices: array[1..6] of Single = (
@@ -10,15 +10,14 @@ const
   );
   IndexSize = 1000;
 var
-  i, j, vao: integer;
+  i, j: integer;
   indices: array[1..IndexSize, 0..2] of Integer;
 begin
   for i:=1 to IndexSize do
     for j:=0 to 2 do
       indices[i, j] := j;
   with TGlfwWindow.Create do try
-    glGenVertexArrays(1, @vao);
-    glBindVertexArray(vao);
+    TGlVao.Create();
     TGlBuffer.Create(GL_ARRAY_BUFFER, @vertices, sizeof(vertices));
     TGlBuffer.Create(GL_ELEMENT_ARRAY_BUFFER, @indices, sizeof(indices));
     TGlProgram.Create('shader');
