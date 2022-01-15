@@ -1,25 +1,26 @@
-unit test10;
+unit test15;
 
-interface
-
-uses
-  Classes, SysUtils, gl,
+interface uses
+  Classes, SysUtils, gl, glext,
   wrappers, sphere;
 
-procedure RunTest10;
+procedure RunTest15;
 
 implementation
 
 var
 	lastTime: TDateTime = 0;
-  instances: Integer = 1;
+  instances: Integer = 10;
 
-procedure RunTest10;
+procedure RunTest15;
 var
   i, j, k: integer;
   color: array[0..2] of Single;
 begin
-  with TGlfwWindow.Create(1.0) do try
+  with TGlfwWindow.Create(1.5) do try
+    TGlBuffer.Create(GL_ARRAY_BUFFER, @SphereVertices, sizeof(SphereVertices));
+    TGlBuffer.Create(GL_ELEMENT_ARRAY_BUFFER, @SphereIndices, sizeof(SphereIndices));
+    glInterleavedArrays(GL_V3F, 0, nil);
     repeat
       if Now - lastTime > 1/86400 then begin
         if lastTime > 0 then begin
@@ -32,18 +33,15 @@ begin
       end;
       glClear(GL_COLOR_BUFFER_BIT);
       for i := 1 to 100 do begin
-        for j := 0 to instances-1 do begin
+        for j := 0 to instances - 1 do begin;
           glLoadIdentity;
           glScalef(0.03, 0.03, 0.03);
           glTranslatef((j mod 10 - 9)*3, j div 10 * 3, 0);
           for k := 0 to 2 do
 	          color[k] := sin(j * (3+k)) * 0.3 + 0.7;
-        	glBegin(GL_TRIANGLES);
           glColor3fv(color);
-          for k := 0 to High(SphereIndices) do
-	          glVertex3fv(@SphereVertices[SphereIndices[k]]);
-          glEnd;
-	      end;
+        	glDrawElements(GL_TRIANGLES, High(SphereIndices), GL_UNSIGNED_INT, nil);
+        end;
       end;
       ProcessMessages;
     until ShouldClose;
@@ -51,7 +49,6 @@ begin
     Free;
   end;
 end;
-
 
 end.
 

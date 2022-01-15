@@ -49,7 +49,7 @@ type
     FActive: TGlfwWindow; static;
     function GetShouldClose: Boolean;
   public
-    constructor Create(glVersion: Currency; Core: Boolean);
+    constructor Create(glVersion: Currency; Core: Boolean = false);
     destructor Destroy; override;
     procedure ProcessMessages;
     property ShouldClose: Boolean read GetShouldClose;
@@ -175,7 +175,12 @@ begin
   glfwMakeContextCurrent( Fhandle );
   repeat until glGetError() = GL_NO_ERROR;
   glfwSetWindowTitle(Fhandle, PChar(String(glGetString(GL_RENDERER)) + ' - ' + String(glGetString(GL_VERSION))));
-  Load_GL_version_3_2_CORE;
+  if glVersion = 3.1 then
+	  Load_GL_version_3_1_CORE();
+  if glVersion = 1.5 then
+	  Load_GL_version_1_5();
+  if glVersion = 1.2 then
+	  Load_GL_version_1_2();
   FObjects := TObjectList.Create();
   glfwSwapInterval(0);
   glfwSetKeyCallback(Fhandle, @keyFunc);

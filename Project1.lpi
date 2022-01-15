@@ -11,7 +11,7 @@
         <SaveFoldState Value="False"/>
       </Flags>
       <SessionStorage Value="InProjectDir"/>
-      <Title Value="glexp"/>
+      <Title Value="Project1"/>
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
       <XPManifest>
@@ -30,7 +30,7 @@
     </RunParams>
     <Units>
       <Unit>
-        <Filename Value="glexp.pas"/>
+        <Filename Value="Project1.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
@@ -53,29 +53,13 @@
         <Filename Value="sphere.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
-      <Unit>
-        <Filename Value="test12.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="test15.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="test10.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="test11.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="11"/>
     <PathDelim Value="\"/>
     <Target>
-      <Filename Value="glexp"/>
+      <Filename Value="project1"/>
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>

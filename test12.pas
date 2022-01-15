@@ -19,7 +19,7 @@ var
   i, j, k: integer;
   color: array[0..2] of Single;
 begin
-  with TGlfwWindow.Create(1.1, false) do try
+  with TGlfwWindow.Create(1.2) do try
     glGetIntegerv(GL_MAX_ELEMENTS_VERTICES, @i);
     WriteLn('GL_MAX_ELEMENTS_VERTICES: ', i);
     glGetIntegerv(GL_MAX_ELEMENTS_INDICES, @i);

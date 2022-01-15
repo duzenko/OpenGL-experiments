@@ -1,10 +1,10 @@
 program glexp;
 
 uses
-  test10, test11, test12, test32;
+  test10, test11, test12, test15, test31;
 
 begin
   WriteLn('Initializing GLFW...');
-  RunTest12;
+  RunTest31;
 end.
 
