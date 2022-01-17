@@ -37,13 +37,13 @@ begin
           glScalef(0.03, 0.03, 0.03);
           glTranslatef((j mod 10 - 9)*3, j div 10 * 3, 0);
           for k := 0 to 2 do
-	          color[k] := sin(j * (3+k)) * 0.3 + 0.7;
-        	glBegin(GL_TRIANGLES);
+	      	color[k] := sin(j * (3+k)) * 0.3 + 0.7;
+          glBegin(GL_TRIANGLES);
           glColor3fv(color);
           for k := 0 to High(SphereIndices) do
-	          glVertex3fv(@SphereVertices[SphereIndices[k]]);
+	      	glVertex3fv(@SphereVertices[SphereIndices[k]]);
           glEnd;
-	      end;
+	  	end;
       end;
       ProcessMessages;
     until ShouldClose;
