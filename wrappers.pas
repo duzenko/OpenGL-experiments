@@ -1,8 +1,6 @@
 unit wrappers;
 
-interface
-
-uses
+interface uses
   SysUtils, Classes, contnrs, gl, GLext, glfw336,
   utils;
 
