@@ -38,14 +38,6 @@
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="shader.fs"/>
-        <IsPartOfProject Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="shader.vs"/>
-        <IsPartOfProject Value="True"/>
-      </Unit>
-      <Unit>
         <Filename Value="utils.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
@@ -57,6 +49,27 @@
         <Filename Value="trianglespersecond.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="TrianglesPerSecond"/>
+      </Unit>
+      <Unit>
+        <Filename Value="drawcallspersecond.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="DrawCallsPerSecond"/>
+      </Unit>
+      <Unit>
+        <Filename Value="glsl\shader.fs"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="glsl\shader.vs"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="glsl\shader43.fs"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="glsl\shader43.vs"/>
+        <IsPartOfProject Value="True"/>
       </Unit>
     </Units>
   </ProjectOptions>

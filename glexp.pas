@@ -1,10 +1,10 @@
 program glexp;
 
 uses
-  TrianglesPerSecond;
+  TrianglesPerSecond, DrawCallsPerSecond;
 
 begin
   WriteLn('Initializing GLFW...');
-  TestTrianglesPerSecond;
+  TestDrawCallsPerSecond;
 end.
 
