@@ -1,5 +1,4 @@
 unit DrawCallsPerSecond;
-
 interface uses
   Classes, SysUtils, gl, glext,
   wrappers;
@@ -14,8 +13,7 @@ var
 
 procedure RunTest;
 var
-  i, j, k: integer;
-  color: array[0..2] of Single;
+  i, j: integer;
   Textures: TList;
 begin
   instances := 20;

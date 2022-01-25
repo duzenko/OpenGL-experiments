@@ -51,24 +51,37 @@
         <UnitName Value="TrianglesPerSecond"/>
       </Unit>
       <Unit>
+        <Filename Value="pixelspersecond.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="PixelsPerSecond"/>
+      </Unit>
+      <Unit>
+        <Filename Value="glsl\triangles.fs"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="glsl\triangles.vs"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="glsl\drawcalls.fs"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="glsl\drawcalls.vs"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
         <Filename Value="drawcallspersecond.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="DrawCallsPerSecond"/>
       </Unit>
       <Unit>
-        <Filename Value="glsl\shader.fs"/>
+        <Filename Value="glsl\pixels.fs"/>
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="glsl\shader.vs"/>
-        <IsPartOfProject Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="glsl\shader43.fs"/>
-        <IsPartOfProject Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="glsl\shader43.vs"/>
+        <Filename Value="glsl\pixels.vs"/>
         <IsPartOfProject Value="True"/>
       </Unit>
     </Units>
@@ -91,7 +104,7 @@
     </Linking>
     <Other>
       <CompilerMessages>
-        <IgnoredMessages idx5024="True"/>
+        <IgnoredMessages idx5062="True" idx5024="True" idx4046="True"/>
       </CompilerMessages>
     </Other>
   </CompilerOptions>

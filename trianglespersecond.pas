@@ -1,5 +1,4 @@
 unit TrianglesPerSecond;
-
 interface uses
   Classes, SysUtils, gl, GLext,
   wrappers, sphere;
@@ -176,7 +175,7 @@ begin
     TGlVao.Create();
     TGlBuffer.Create(GL_ARRAY_BUFFER, @SphereVertices, sizeof(SphereVertices));
     TGlBuffer.Create(GL_ELEMENT_ARRAY_BUFFER, @SphereIndices, sizeof(SphereIndices));
-    TGlProgram.Create('shader');
+    TGlProgram.Create('triangles');
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nil);
     repeat

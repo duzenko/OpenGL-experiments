@@ -1,5 +1,4 @@
 unit wrappers;
-
 interface uses
   SysUtils, Classes, contnrs, gl, GLext, glfw336,
   utils;
@@ -9,7 +8,7 @@ type
   { TGlObject }
 
   TGlObject = class
-    Fhandle: GLuint;
+    FHandle: GLuint;
     constructor Create;
     destructor Destroy; override;
     procedure Bind; virtual; abstract;
@@ -46,6 +45,7 @@ type
   public
     constructor Create(const FileName: String);
     destructor Destroy; override;
+    procedure Uniform(const AName: String; AValue: Integer);
   end;
 
   { TGlfwWindow }
@@ -53,11 +53,13 @@ type
   TGlfwWindow = class
   private
     Ffps: Integer;
-    Fhandle: pGLFWwindow;
+    FHandle: pGLFWwindow;
     FObjects: TObjectList;
     FActive: TGlfwWindow; static;
     function GetShouldClose: Boolean;
   public
+    Width, Height: Integer;
+    OnFpsChanged: procedure;
     constructor Create(glVersion: Currency; Core: Boolean = false);
     destructor Destroy; override;
     procedure ProcessMessages;
@@ -74,18 +76,25 @@ begin
     glfwSetWindowShouldClose(p, 1);
 end;
 
+procedure windowSize(window: pGLFWwindow; Width, Height: integer); cdecl;
+begin
+  TGlfwWindow.Active.Width := Width;
+  TGlfwWindow.Active.Height := Height;
+  glViewport(0, 0, Width, Height);
+end;
+
 { TGlTexture }
 
 constructor TGlTexture.Create;
 var
-  i, j: Integer;
+  i, j: Cardinal;
   data: array[0..15, 0..15] of Byte;
 begin
-  glGenTextures(1, @Fhandle);
-  glBindTexture(GL_TEXTURE_2D, Fhandle);
+  glGenTextures(1, @FHandle);
+  glBindTexture(GL_TEXTURE_2D, FHandle);
   for i := 0 to 15 do begin
     for j := 0 to 15 do begin
-      data[i][j] := 255 * byte( (i+Fhandle) and 8 = (j+GetTickCount+Integer(Self) shr 4) and 8 );
+      data[i][j] := 255 * byte( (i+FHandle) and 8 = (j+GetTickCount64+Integer(Self) shr 4) and 8 );
     end;
   end;
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, 16, 16, 0, GL_RED, GL_UNSIGNED_BYTE, @data);
@@ -95,26 +104,26 @@ end;
 
 destructor TGlTexture.Destroy;
 begin
-  glDeleteTextures(1, @Fhandle);
+  glDeleteTextures(1, @FHandle);
   inherited Destroy;
 end;
 
 procedure TGlTexture.Bind;
 begin
-  glBindTexture(GL_TEXTURE_2D, Fhandle);
+  glBindTexture(GL_TEXTURE_2D, FHandle);
 end;
 
 { TGlVao }
 
 constructor TGlVao.Create();
 begin
-  glGenVertexArrays(1, @Fhandle);
-  glBindVertexArray(Fhandle);
+  glGenVertexArrays(1, @FHandle);
+  glBindVertexArray(FHandle);
 end;
 
 destructor TGlVao.Destroy;
 begin
-  glDeleteVertexArrays(1, @Fhandle);
+  glDeleteVertexArrays(1, @FHandle);
   inherited Destroy;
 end;
 
@@ -137,7 +146,7 @@ end;
 constructor TGlProgram.Create(const FileName: String);
 var
   Status, LogLength: GLint;
-  FProgram, VertexShader, FragmentShader: GLuint;
+  VertexShader, FragmentShader: GLuint;
   Log: TBytes;
   Msg: String;
 begin
@@ -145,24 +154,24 @@ begin
   VertexShader := CreateShader('glsl\' + FileName+'.vs', GL_VERTEX_SHADER);
   try
     FragmentShader := CreateShader('glsl\' + FileName+'.fs', GL_FRAGMENT_SHADER);
-    FProgram := glCreateProgram();
+    FHandle := glCreateProgram();
 
-    glAttachShader(FProgram, VertexShader);
+    glAttachShader(FHandle, VertexShader);
     glErrorCheck;
 
-    glAttachShader(FProgram, FragmentShader);
+    glAttachShader(FHandle, FragmentShader);
     glErrorCheck;
 
-    glLinkProgram(FProgram);
-    glGetProgramiv(FProgram, GL_LINK_STATUS, @Status);
+    glLinkProgram(FHandle);
+    glGetProgramiv(FHandle, GL_LINK_STATUS, @Status);
 
     if (Status <> GL_TRUE) then
     begin
-      glGetProgramiv(FProgram, GL_INFO_LOG_LENGTH, @LogLength);
+      glGetProgramiv(FHandle, GL_INFO_LOG_LENGTH, @LogLength);
       if (LogLength > 0) then begin
         Log := nil;
        SetLength(Log, LogLength);
-       glGetProgramInfoLog(FProgram, LogLength, @LogLength, @Log[0]);
+       glGetProgramInfoLog(FHandle, LogLength, @LogLength, @Log[0]);
        Msg := TEncoding.ANSI.GetAnsiString(Log);
        raise Exception.Create(Msg);
       end;
@@ -176,8 +185,7 @@ begin
     if (VertexShader <> 0) then
      glDeleteShader(VertexShader);
   end;
-  Fhandle:= FProgram;
-  glUseProgram(Fhandle);
+  glUseProgram(FHandle);
 end;
 
 destructor TGlProgram.Destroy;
@@ -185,11 +193,20 @@ begin
   inherited Destroy;
 end;
 
+procedure TGlProgram.Uniform(const AName: String; AValue: Integer);
+var
+  location: Integer;
+begin
+  location := glGetUniformLocation(FHandle, PChar(AName));
+  if location < 0 then Exit;
+  glUniform1i(location, AValue);
+end;
+
 { TGlfwWindow }
 
 function TGlfwWindow.GetShouldClose: Boolean;
 begin
-  result := glfwWindowShouldClose(Fhandle) <> 0;
+  result := glfwWindowShouldClose(FHandle) <> 0;
 end;
 
 constructor TGlfwWindow.Create(glVersion: Currency; Core: Boolean);
@@ -205,13 +222,13 @@ begin
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   end;
   WriteLn('Creating window...');
-  Fhandle := glfwCreateWindow(1280, 800, '', nil, nil);
-  if Fhandle = nil then
+  FHandle := glfwCreateWindow(1280, 800, '', nil, nil);
+  if FHandle = nil then
      raise Exception.Create('GLFW failed to create window');
   WriteLn('Loading GL functions...');
-  glfwMakeContextCurrent( Fhandle );
+  glfwMakeContextCurrent( FHandle );
   repeat until glGetError() = GL_NO_ERROR;
-  glfwSetWindowTitle(Fhandle, PChar(String(glGetString(GL_RENDERER)) + ' - ' + String(glGetString(GL_VERSION))));
+  glfwSetWindowTitle(FHandle, PChar(String(glGetString(GL_RENDERER)) + ' - ' + String(glGetString(GL_VERSION))));
   if glVersion <= 1.2 then
 	  Load_GL_version_1_2()
   else if glVersion <= 1.5 then
@@ -222,7 +239,9 @@ begin
 	  Load_GL_version_4_3_CORE();
   FObjects := TObjectList.Create();
   glfwSwapInterval(0);
-  glfwSetKeyCallback(Fhandle, @keyFunc);
+  glfwSetKeyCallback(FHandle, @keyFunc);
+  glfwGetWindowSize(FHandle, Width, Height);
+  glfwSetWindowSizeCallback(FHandle, @windowSize);
   WriteLn('Done');
 end;
 
@@ -238,13 +257,17 @@ procedure TGlfwWindow.ProcessMessages;
 const
 	lastTime: TDateTime = 0;
   frameCnt: Integer = 0;
+var
+  curTime: TDateTime;
 begin
-  glfwSwapBuffers(Fhandle);
+  glfwSwapBuffers(FHandle);
   glfwPollEvents;
-  if Now - lastTime > 1/86400 then begin
-    Ffps := Round(frameCnt * (Now - lastTime) * 86400);
-    lastTime := Now;
+  curTime := Now;
+  if curTime - lastTime > 1/86400 then begin
+    Ffps := Round(frameCnt * (curTime - lastTime) * 86400);
+    lastTime := curTime;
     frameCnt := 0;
+    OnFpsChanged;
   end;
   Inc(frameCnt);
 end;
@@ -255,14 +278,14 @@ constructor TGlBuffer.Create(target: Integer; p: pointer; size: Integer);
 begin
   inherited Create;
   Ftarget := target;
-  glGenBuffers(1, @Fhandle);
-  glBindBuffer(Ftarget, Fhandle);
+  glGenBuffers(1, @FHandle);
+  glBindBuffer(Ftarget, FHandle);
   glBufferData(Ftarget, size, p, GL_STATIC_DRAW);
 end;
 
 destructor TGlBuffer.Destroy;
 begin
-  glDeleteBuffers(1, @Fhandle);
+  glDeleteBuffers(1, @FHandle);
   inherited Destroy;
 end;
 
