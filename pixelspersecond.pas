@@ -9,6 +9,7 @@ implementation
 
 var
   instances: Integer = 60;
+  textureCount: Integer = 1;
 
 procedure FpsChanged();
 
@@ -38,6 +39,25 @@ begin
   WriteInfo(false);
 end;
 
+procedure KeyPressed(Key: LongInt);
+
+  procedure WriteInfo(Full: Boolean = true);
+  begin
+    WriteLn('Texture count: ', textureCount, '. ');
+  end;
+
+begin
+  WriteLn('Key pressed: ', Key);
+  if (Key = 334) and (textureCount < 8) then begin
+    Inc(textureCount);
+    WriteInfo();
+  end;
+  if (Key = 333) and (textureCount > 0) then begin
+    Dec(textureCount);
+    WriteInfo();
+  end;
+end;
+
 procedure TestPixelsPerSecond;
 var
   i, j: integer;
@@ -46,18 +66,19 @@ begin
   Textures := TList.Create;
   with TGlfwWindow.Create(2.1), TGlProgram.Create('pixels') do try
     OnFpsChanged := @FpsChanged;
+    OnKeyPressed := @KeyPressed;
     repeat
       glEnable(GL_BLEND);
       glBlendFunc(GL_SRC_ALPHA, GL_SRC_ALPHA);
       glClear(GL_COLOR_BUFFER_BIT);
-      for i := 1 to 1 do begin
-        for j := 0 to instances - 1 do begin;
-          if j >= Textures.Count then
-            Textures.Add( TGlTexture.Create );
-          TGlTexture(Textures[j]).Bind;
-          Uniform('instanceID', j);
-          glRectf(-1, -1, 1, 1);
-        end;
+      Uniform('textureCount', textureCount);
+      while textureCount >= Textures.Count do
+        Textures.Add( TGlTexture.Create );
+      for i := 0 to textureCount - 1 do
+        TGlTexture(Textures[i]).Bind(i);
+      for j := 0 to instances - 1 do begin;
+        Uniform('instanceID', j);
+        glRectf(-1, -1, 1, 1);
       end;
       ProcessMessages;
     until ShouldClose;

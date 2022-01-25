@@ -11,7 +11,7 @@ type
     FHandle: GLuint;
     constructor Create;
     destructor Destroy; override;
-    procedure Bind; virtual; abstract;
+    //procedure Bind; virtual; abstract;
   end;
 
   { TGlVao }
@@ -21,7 +21,7 @@ type
   TGlTexture = class(TGlObject)
     constructor Create();
     destructor Destroy; override;
-    procedure Bind; override;
+    procedure Bind(TMU: Integer = 0); //override;
   end;
 
   { TGlVao }
@@ -60,6 +60,7 @@ type
   public
     Width, Height: Integer;
     OnFpsChanged: procedure;
+    OnKeyPressed: procedure(Key: LongInt);
     constructor Create(glVersion: Currency; Core: Boolean = false);
     destructor Destroy; override;
     procedure ProcessMessages;
@@ -74,6 +75,8 @@ procedure keyFunc(p: pGLFWWindow; i2, i3, i4, i5: longint); cdecl;
 begin
   if(i2=256) then
     glfwSetWindowShouldClose(p, 1);
+  if i4 <> 0 then
+    TGlfwWindow.Active.OnKeyPressed(i2);
 end;
 
 procedure windowSize(window: pGLFWwindow; Width, Height: integer); cdecl;
@@ -86,19 +89,23 @@ end;
 { TGlTexture }
 
 constructor TGlTexture.Create;
+const
+  TextureSize = 1024;
+  HalfStep = TextureSize shr 2;
 var
   i, j: Cardinal;
-  data: array[0..15, 0..15] of Byte;
+  data: array[0..TextureSize-1, 0..TextureSize-1] of Byte;
 begin
   glGenTextures(1, @FHandle);
   glBindTexture(GL_TEXTURE_2D, FHandle);
-  for i := 0 to 15 do begin
-    for j := 0 to 15 do begin
-      data[i][j] := 255 * byte( (i+FHandle) and 8 = (j+GetTickCount64+Integer(Self) shr 4) and 8 );
+  for i := 0 to TextureSize-1 do begin
+    for j := 0 to TextureSize-1 do begin
+      data[i][j] := 255 * byte( (i+FHandle) and HalfStep = (j+GetTickCount64+Integer(Self) shr 4) and HalfStep );
     end;
   end;
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, 16, 16, 0, GL_RED, GL_UNSIGNED_BYTE, @data);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, TextureSize, TextureSize, 0, GL_RED, GL_UNSIGNED_BYTE, @data);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 end;
 
@@ -108,8 +115,9 @@ begin
   inherited Destroy;
 end;
 
-procedure TGlTexture.Bind;
+procedure TGlTexture.Bind(TMU: Integer = 0);
 begin
+  glActiveTexture(TMU);
   glBindTexture(GL_TEXTURE_2D, FHandle);
 end;
 
